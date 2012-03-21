@@ -14,24 +14,6 @@ CREATE TABLE t_vehicles (
         vehicle_purchase_price INTEGER,
         vehicle_tank_capacity INTEGER );
 
-INSERT INTO t_vehicles  ( vehicle_make, vehicle_model, vehicle_trim,
-        vehicle_mfg_year, vehicle_license_number, vehicle_purchase_date,
-        vehicle_initial_odo, vehicle_purchase_price, vehicle_tank_capacity )
-VALUES ( "TVS", "Fiero", "", 2004, "MH-12-CE-9817", "2004-03-30", 0, 50000,
-        12 );
-
-INSERT INTO t_vehicles  ( vehicle_make, vehicle_model, vehicle_trim,
-        vehicle_mfg_year, vehicle_license_number, vehicle_purchase_date,
-        vehicle_initial_odo, vehicle_purchase_price, vehicle_tank_capacity )
-VALUES ( "Hyundai", "Santro", "Xing XG", 2005, "MH-12-CR-7391", "2005-07-12",
-        0, 400000, 35 );
-
-INSERT INTO t_vehicles  ( vehicle_make, vehicle_model, vehicle_trim,
-        vehicle_mfg_year, vehicle_license_number, vehicle_purchase_date,
-        vehicle_initial_odo, vehicle_purchase_price, vehicle_tank_capacity )
-VALUES ( "Hyundai", "Verna", "1.6 VTVT SX", 2011, "MH-12-GV-6932", "2011-06-04",
-        0, 940000, 43 );
-
 CREATE TABLE t_odo (
         odo_id INTEGER NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
         vehicle_id INTEGER NOT NULL,
@@ -68,13 +50,6 @@ CREATE TABLE t_fillups (
 
 
 
-INSERT INTO
-    t_odo_monthly ( vehicle_id, odo_month, odo_monthly_aggr )
-VALUES
-    ( 3, "2012-02-01", ( select round(sum(odo_diff),1) from t_odo where vehicle_id=3 and odo_date >= "2012-02-01" and odo_date <= "2012-02-29" ) )
-ON DUPLICATE KEY UPDATE
-    odo_monthly_aggr = ( select round(sum(odo_diff),1) from t_odo where vehicle_id=3 and odo_date >= "2012-02-01" and odo_date <= "2012-02-29" );
-
 -- month looks something like "2012-01-01" for Jan 2012
 DELIMITER //
 CREATE PROCEDURE calc_monthly ( IN vehicleId INT, IN month TEXT )
@@ -102,3 +77,4 @@ END
 //
 
 DELIMITER ;
+
