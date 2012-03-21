@@ -1,0 +1,8 @@
+MAIN SCREEN
+-----------
+
+<HOME LINK>                      < VEHICLE SELECTOR >
+<Add Fill Up Rec> <Add Service Rec> <Add Expense Rec>
+<Add Trip Rec   > <Add Vehicle    > <Browse Recs    >
+<Stats          > <Charts         > <Settings       >
+<Import/Export  >

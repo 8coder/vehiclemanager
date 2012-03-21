@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #666;
+}
+
+#wrapper {
+    margin: 50px auto;
+}
+
+.form {
+    float: left;
+    padding: 0 10px 10px 10px;
+    background: rgb(243,243,243);
+    border: 2px solid rgb(207,207,207);
+}
+
+.form label {
+    float: left;
+    padding: 10px 10px 0 0;
+    font-weight: bold;
+}
+
+.form select {
+    float: left;
+    margin-top: 10px;
+}
+
+.form input {
+    float: left;
+    margin-top: 10px;
+}
+
+.form .submit {
+    clear: both;
+}
+
+#msg {
+    display: none;
+    position: absolute;
+    z-index: 200;
+    background: url("msg_arrow.gif") left center no-repeat;
+    padding-left: 7px;
+}
+
+#msgContent {
+    display: block;
+    background: rgb(243,230,230);
+    border: 2px solid rgb(146,73,73);
+    border-left: none;
+    padding: 5px;
+}
+
