@@ -13,8 +13,8 @@ add_output (
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF8">
   <title>Vehicle Manager</title>
-  <link rel="stylesheet" type="text/css" href="style.css"/>
-  <script type="text/javascript" src="carmanager.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="text/javascript" src="js/carmanager.js"></script>
  </head>
  <body>
 ' );
