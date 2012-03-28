@@ -405,9 +405,16 @@ function browseRecords()
 
     add_output ( ' <table id="browseRecordsTable" rules="all" border="1" align="center" cellspacing="5" cellpadding="5"><tbody> ' );
     add_output ( '<tr><th>Date</th><th>Odo Reading</th><th>Odo Diff</th></tr>' );
+    $monthlyTotal = 0.0;
     while ( $row = mysql_fetch_assoc ( $results ) ) {
         add_output ( '<tr><td>' . $row['odo_date'] . '</td><td align="right">' . $row['odo_reading'] . '</td><td align="right">' . $row['odo_diff'] . '</td></tr>' );
+        $thisReading = 0.0;
+        sscanf ( $row['odo_diff'], '%f', $thisReading );
+        $monthlyTotal += $thisReading;
     }
+
+    // Display monthly total
+    add_output ( '<tr><td></td><td align="right"><b>Total</b></td><td align="right"><b>' . $monthlyTotal . '</b></td></tr>' );
 
     add_output ( '<tr align="right"><td colspan="3">' );
     if ( $hasPrevData ) {
