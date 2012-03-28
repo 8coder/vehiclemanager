@@ -21,7 +21,7 @@ class Vehicle
     // return 2 = no vehicles
     static function getVehicles()
     {
-        $queryStr = 'SELECT * FROM carmanager.t_vehicles ORDER BY vehicle_id;';
+        $queryStr = 'SELECT * FROM vehiclemanager.t_vehicles ORDER BY vehicle_id;';
         $results = mysql_query ( $queryStr );
         if ( ! $results ) {
             return 1;

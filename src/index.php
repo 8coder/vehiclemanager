@@ -170,7 +170,7 @@ function showAddTripRecord()
     $selectedVehicle = Vehicle::getVehicle ( $vehicleId );
 
     // last odo date and reading query
-    $lastOdoQueryStr = 'SELECT odo_date, odo_reading from carmanager.t_odo where vehicle_id = ' . $vehicleId . ' and odo_date = ( select max(odo_date) from carmanager.t_odo where vehicle_id = ' . $vehicleId . ');';
+    $lastOdoQueryStr = 'SELECT odo_date, odo_reading from vehiclemanager.t_odo where vehicle_id = ' . $vehicleId . ' and odo_date = ( select max(odo_date) from vehiclemanager.t_odo where vehicle_id = ' . $vehicleId . ');';
     $results = mysql_query ( $lastOdoQueryStr );
     $result = mysql_fetch_assoc ( $results );
     $lastOdoDate = $result['odo_date'];
@@ -209,9 +209,9 @@ function addTripRecord()
     $selectedVehicle = Vehicle::getVehicle ( $vehicleId );
 
     // last odo reading query
-    $lastOdoQueryStr = 'SELECT odo_reading from carmanager.t_odo where vehicle_id = '
+    $lastOdoQueryStr = 'SELECT odo_reading from vehiclemanager.t_odo where vehicle_id = '
         . $vehicleId
-        . ' and odo_date = ( select max(odo_date) from carmanager.t_odo where vehicle_id = '
+        . ' and odo_date = ( select max(odo_date) from vehiclemanager.t_odo where vehicle_id = '
         . $vehicleId . ');';
     $results = mysql_query ( $lastOdoQueryStr );
     $result = mysql_fetch_assoc ( $results );
@@ -220,7 +220,7 @@ function addTripRecord()
     $odoDiff = $odoReading + 0.0 - $lastOdoReading;
     $odoDiffStr = sprintf ( "%.1f", $odoDiff );
 
-    $queryStr = 'INSERT INTO carmanager.t_odo ( vehicle_id, odo_date, odo_reading, odo_diff ) VALUES ( ';
+    $queryStr = 'INSERT INTO vehiclemanager.t_odo ( vehicle_id, odo_date, odo_reading, odo_diff ) VALUES ( ';
     $queryStr = $queryStr . $vehicleId . ', "' . $odoDate . '", ' . $odoReading . ', '
         . $odoDiffStr . ' );';
 
@@ -327,7 +327,7 @@ function getEndDate ( $startDate )
 
 function checkForRecords ( $vehicleId, $startDate, $endDate )
 {
-    $queryStr = 'SELECT COUNT(*) FROM carmanager.t_odo WHERE vehicle_id = ' .
+    $queryStr = 'SELECT COUNT(*) FROM vehiclemanager.t_odo WHERE vehicle_id = ' .
         $vehicleId . ' AND odo_date >= "' . $startDate . '" AND odo_date <= "' .
         $endDate . '";';
 
@@ -384,7 +384,7 @@ function browseRecords()
     $hasPrevData = checkForRecords ( $vehicleId, $prevStartDate, $prevEndDate );
     $hasNextData = checkForRecords ( $vehicleId, $nextStartDate, $nextEndDate );
 
-    $queryStr = 'SELECT * FROM carmanager.t_odo WHERE vehicle_id = ' .
+    $queryStr = 'SELECT * FROM vehiclemanager.t_odo WHERE vehicle_id = ' .
         $vehicleId . ' AND odo_date >= "' . $startDate . '" and odo_date <= "' .
         $endDate . '";';
     $results = mysql_query ( $queryStr );
