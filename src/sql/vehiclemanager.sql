@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXIST carmanager;
+CREATE DATABASE IF NOT EXIST vehiclemanager;
 
-USE carmanager;
+USE vehiclemanager;
 
 CREATE TABLE t_vehicles (
         vehicle_id INTEGER NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
