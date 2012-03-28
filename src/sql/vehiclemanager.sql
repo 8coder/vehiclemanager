@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXIST vehiclemanager;
+CREATE DATABASE IF NOT EXISTS vehiclemanager;
 
 USE vehiclemanager;
 
