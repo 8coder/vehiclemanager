@@ -46,7 +46,9 @@ CREATE TABLE t_fillups (
         fillup_partial TINYINT NOT NULL,
         fillup_fuel_brand TEXT,
         fillup_station TEXT,
-        fillup_payment_type TEXT );
+        fillup_payment_type TEXT,
+        fillup_range FLOAT,
+        fillup_efficiency FLOAT );
 
 
 
