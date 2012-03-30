@@ -46,6 +46,9 @@ if ( $dbh = mysql_connect ( 'localhost', 'root', '' ) ) {
     if ( $actionStr == "addTripRecord" ) {
         showAddTripRecord();
     }
+    else if ( $actionStr == "addFillupRecord" ) {
+        showAddFillupRecord();
+    }
     else if ( $actionStr == "addVehicle" ) {
         showAddVehicleScreen();
     }
@@ -197,6 +200,83 @@ function showAddTripRecord()
     </td>
    </tr>
    <tr><td></td><td><input name="submit" type="submit" value="Add Trip Record"/>
+   <input name="cancel" type="submit" value="Cancel" onclick="doCancel();"/></td></tr>
+  </tbody></table></form></div>' );
+}
+
+function showAddFillupRecord()
+{
+    add_output ( '</tr></tbody></table></div>' );
+
+    $vehicleId = $_GET['vehicleId'];
+    $selectedVehicle = Vehicle::getVehicle ( $vehicleId );
+
+    // TODO: last fillup details...
+    $lastFillupQueryStr = 'SELECT * from vehiclemanager.t_fillups where vehicle_id = ' . $vehicleId . ' and fillup_date = ( select max(fillup_date) from vehiclemanager.t_fillups where vehicle_id = ' . $vehicleId . ');';
+    $results = mysql_query ( $lastFillupQueryStr );
+    $lastFillupDate = 'NONE';
+    $lastFillupOdo = -1.0;
+    $lastFillupVolume = -1.0;
+    $lastFillupPrice = -1.0;
+    $lastFillupAmount = -1.0;
+    if ( mysql_num_rows ( $results ) == 1 ) {
+        $result = mysql_fetch_assoc ( $results );
+        $lastFillupDate = $result['fillup_date'];
+        $lastFillupOdo = $result['fillup_odo'];
+        $lastFillupVolume = $result['fillup_volume'];
+        $lastFillupPrice = $result['fillup_price'];
+        $lastFillupAmount = $result['fillup_amount'];
+    }
+
+    add_output ( '
+ <div id="bottomlayer">
+  <h2>Add Fillup Record for ' . $selectedVehicle->getMake() . ' ' .
+  $selectedVehicle->getModel() . '</h2>' );
+
+    add_output ( '
+  <form name="addFillupRecordForm" id="addFillupRecordForm" method="post" action=".?vehicleId=' . $vehicleId . '" enctype="multipart/form-data" onsubmit="return ValidateAddFillupRecordForm(this, \'' . $lastOdoDate . '\', ' . $lastOdoReading . ');">
+  <table id="addFillupRecordTable" align="center"><tbody>
+   <tr>
+    <td><label>Date (YYYY-MM-DD)</label></td>
+    <td><input type="text" id="fillupDate" name="fillupDate" size="16">
+    <label>Last Fillup Date: ' . $lastFillupDate . '</label></td>
+   </tr>
+   <tr>
+    <td><label>Odo Reading</label></td>
+    <td>
+     <input type="text" id="fillupOdo" name="fillupOdo" size="8">
+     <label>Last Odo: ' . $lastFillupOdo . '</label>
+     <input type="hidden" id="vehicleId" name="vehicleId" value="' . $vehicleId . '">
+    </td>
+   </tr>
+   <tr>
+    <td><label>Price per liter</label></td>
+    <td><input type="text" id="fillupPrice" name="fillupPrice" size="8"></td>
+   </tr>
+   <tr>
+    <td><label>Volume</label></td>
+    <td><input type="text" id="fillupVolume" name="fillupVolume" size="8"></td>
+   </tr>
+   <tr>
+    <td><label>Total Amount</label></td>
+    <td><input type="text" id="fillupAmount" name="fillupAmount" size="8"></td>
+   <tr>
+    <td><label>Partial Fillup?</label></td>
+    <td><input type="checkbox" id="fillupPartial" name="fillupPartial"></td>
+   </tr>
+   <tr>
+    <td><label>Fuel Brand</label></td>
+    <td><input type="text" id="fillupBrand" name="fillupBrand" size="8"></td>
+   </tr>
+   <tr>
+    <td><label>Fuel Station</label></td>
+    <td><input type="text" id="fillupStation" name="fillupStation" size="8"></td>
+   </tr>
+   <tr>
+    <td><label>Payment Type</label></td>
+    <td><input type="text" id="fillupPaymentType" name="fillupPaymentType" size="8"></td>
+   </tr>
+   <tr><td></td><td><input name="submit" type="submit" value="Add Fillup Record"/>
    <input name="cancel" type="submit" value="Cancel" onclick="doCancel();"/></td></tr>
   </tbody></table></form></div>' );
 }
