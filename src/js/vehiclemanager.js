@@ -66,7 +66,7 @@ function createDate ( dateStr )
     var lastDash = dateStr.lastIndexOf ( '-' );
 
     var year = parseInt ( dateStr.slice(0, firstDash), 10 );
-    var month = parseInt ( dateStr.slice(firstDash+1, lastDash), 10 );
+    var month = parseInt ( dateStr.slice(firstDash+1, lastDash), 10 ) - 1;
     if ( month <= 0 || month > 12 ) {
         return false;
     }
@@ -111,7 +111,7 @@ function createDate ( dateStr )
             }
     }
 
-    return Date ( year, month, day );
+    return new Date ( year, month, day );
 }
 
 function validateDate ( dateStr )
@@ -181,13 +181,13 @@ function isLatestDate ( curDate, lastDate )
     var firstDash = curDate.indexOf ( '-' );
     var lastDash = curDate.lastIndexOf ( '-' );
     var curYear = parseInt ( curDate.slice ( 0, firstDash ), 10 );
-    var curMonth = parseInt ( curDate.slice ( firstDash + 1, lastDash ), 10 );
+    var curMonth = parseInt ( curDate.slice ( firstDash + 1, lastDash ), 10 ) - 1;
     var curDay = parseInt ( curDate.slice ( lastDash + 1 ), 10 );
 
     firstDash = lastDate.indexOf ( '-' );
     lastDash = lastDate.lastIndexOf ( '-' );
     var lastYear = parseInt ( lastDate.slice ( 0, firstDash ), 10 );
-    var lastMonth = parseInt ( lastDate.slice ( firstDash + 1, lastDash ), 10 );
+    var lastMonth = parseInt ( lastDate.slice ( firstDash + 1, lastDash ), 10 ) - 1;
     var lastDay = parseInt ( lastDate.slice ( lastDash + 1 ), 10 );
 
     date1 = new Date ( curYear, curMonth, curDay );
