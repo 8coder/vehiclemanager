@@ -234,7 +234,7 @@ function showAddFillupRecord()
   $selectedVehicle->getModel() . '</h2>' );
 
     add_output ( '
-  <form name="addFillupRecordForm" id="addFillupRecordForm" method="post" action=".?vehicleId=' . $vehicleId . '" enctype="multipart/form-data" onsubmit="return ValidateAddFillupRecordForm(this, \'' . $lastOdoDate . '\', ' . $lastOdoReading . ');">
+  <form name="addFillupRecordForm" id="addFillupRecordForm" method="post" action=".?vehicleId=' . $vehicleId . '" enctype="multipart/form-data" onsubmit="return ValidateAddFillupRecordForm(this, \'' . $lastFillupDate . '\', ' . $lastFillupOdo . ');">
   <table id="addFillupRecordTable" align="center"><tbody>
    <tr>
     <td><label>Date (YYYY-MM-DD)</label></td>
